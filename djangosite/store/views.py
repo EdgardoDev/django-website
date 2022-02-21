@@ -36,3 +36,30 @@ def electronics(request):
         return render(request, "store/list.html", {"items": items})
     elif request.method == 'POST':
         return HttpResponseNotFound("Page not found")
+    
+# Class base view
+class ElectronicsView(View):
+    def get(self, request):
+        items = ("Windows PC", "Apple Mac", "Apple IPhone", "Lenovo", "Samsung", "Google" )
+        paginator = Paginator(items, 2)
+        pages = request.GET.get('page', 1)
+        try:
+            items = paginator.page(pages)
+        except PageNotAnInteger:
+            items = paginator.page(1)
+        return render(request, "store/list.html", {"items": items})
+    
+# Class template view
+class ElectronicsView2(TemplateView):
+    template_name = "store/list.html"
+    def get_context_data(self, **kwargs):
+        items = ("Windows PC", "Apple Mac", "Apple IPhone", "Lenovo", "Samsung", "Google" )
+        context = {"items": items}
+        return context
+    
+# Class ListView
+class ElectronicsView3(ListView):
+    template_name = "store/list.html"
+    queryset = ("Windows PC", "Apple Mac", "Apple IPhone", "Lenovo", "Samsung", "Google" )
+    context_object_name = "items"
+    paginate_by = 2
