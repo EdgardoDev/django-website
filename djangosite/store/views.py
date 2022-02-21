@@ -49,6 +49,18 @@ class ElectronicsView(View):
             items = paginator.page(1)
         return render(request, "store/list.html", {"items": items})
     
+    def process(self):
+        print("We are processing Electronics")
+        
+class ComputersView(ElectronicsView):
+    pass
+        
+class MobileView():
+    pass
+        
+class EquipmentView(MobileView, ComputersView):
+    pass
+    
 # Class template view
 class ElectronicsView2(TemplateView):
     template_name = "store/list.html"

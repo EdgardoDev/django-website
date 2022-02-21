@@ -30,7 +30,7 @@
             {% if items.has_previous %}
                 <td><a href="?page={{ items.previous_page_number }}">&laquo;</a></td>
             {% else %}
-                <td class="disabled"><span>&loquo;</span></td>
+                <td class="disabled"><span>&laquo;</span></td>
             {% endif %}
             {% for i in items.paginator.page_range %}
                 {% if items.number == i %}
